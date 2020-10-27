@@ -1,23 +1,3 @@
-var tradingCardData = [
-  {
-    name: 'Balloonicorn',
-    skill: 'video games',
-    imgUrl: '/static/img/balloonicorn.jpg'
-  },
-
-  {
-    name: 'Float',
-    skill: 'baking pretzels',
-    imgUrl: '/static/img/float.jpg'
-  },
-
-  {
-    name: 'Llambda',
-    skill: 'knitting scarves',
-    imgUrl: '/static/img/llambda.jpg'
-  }
-];
-
 function TradingCard(props) {
   return (
     <div className="card">
@@ -26,12 +6,21 @@ function TradingCard(props) {
       <p>Skill: {props.skill} </p>
     </div>
   );
-}
+};
 
 function TradingCardContainer() {
-  const tradingCards = [];
 
-  for (const currentCard of tradingCardData) {
+  React.useEffect(() => {
+    fetch('/cards.json')
+    .then((response) => response.json())
+    .then((data) => updateCards(data))
+  }, []);
+
+
+
+  const [cards, updateCards] = React.useState('cards');
+  const tradingCards = [];
+  for (const currentCard of cards) {
     tradingCards.push(
       <TradingCard
         key={currentCard.name}

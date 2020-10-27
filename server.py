@@ -88,9 +88,10 @@ def add_card():
     name = request.form.get('name')
     skill = request.form.get('skill')
 
-    new_card = Card(name=name, skill=skill)
-    db.session.add(new_card)
-    db.session.commit()
+    # new_card = Card(name=name, skill=skill)
+    # db.session.add(new_card)
+    # db.session.commit() 
+    DATA["cards"].append({"name":name, "skill":skill, "imgUrl": None}) 
 
     return jsonify({"success": True})
 
@@ -103,3 +104,14 @@ def show_cards_jquery():
 if __name__ == "__main__":
   # connect_to_db(app)
     app.run(debug=True, host='0.0.0.0')
+
+
+# Where did listofCards come from again?
+
+# I think he replaced it from data
+
+# It is the response from route /cards.json converted to javascript
+
+# used to be “data => updatedCards(data))
+# primitive
+# little immutable things int or str
